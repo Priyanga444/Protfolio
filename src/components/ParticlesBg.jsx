@@ -11,17 +11,17 @@ const particleOptions = {
       onClick: { enable: true, mode: 'push' },
     },
     modes: {
-      repulse: { distance: 80, duration: 0.4 },
+      repulse: { distance: 70, duration: 0.4 },
       push: { quantity: 2 },
     },
   },
   particles: {
-    color: { value: ['#6C63FF', '#00D4FF', '#8B5CF6'] },
+    color: { value: ['#6C63FF', '#8B5CF6', '#0099CC'] },
     links: {
-      color: '#6C63FF',
-      distance: 120,
+      color: '#8B5CF6',
+      distance: 130,
       enable: true,
-      opacity: 0.12,
+      opacity: 0.09,
       width: 1,
     },
     move: {
@@ -29,14 +29,14 @@ const particleOptions = {
       enable: true,
       outModes: { default: 'bounce' },
       random: true,
-      speed: 0.5,
+      speed: 0.45,
       straight: false,
     },
     number: {
-      density: { enable: true, area: 900 },
-      value: 55,
+      density: { enable: true, area: 1000 },
+      value: 50,
     },
-    opacity: { value: { min: 0.08, max: 0.35 } },
+    opacity: { value: { min: 0.05, max: 0.22 } },
     shape: { type: 'circle' },
     size: { value: { min: 1, max: 2.5 } },
   },
@@ -44,7 +44,6 @@ const particleOptions = {
 }
 
 export default function ParticlesBg() {
-  // useCallback ensures a stable reference so ParticlesProvider doesn't throw
   const initParticles = useCallback(async (engine) => {
     await loadSlim(engine)
   }, [])
