@@ -5,45 +5,41 @@ const skillCategories = [
     title: 'Programming Languages',
     icon: '💻',
     skills: [
-      { name: 'Python',      percent: 90 },
-      { name: 'JavaScript',  percent: 88 },
-      { name: 'HTML & CSS',  percent: 92 },
-      { name: 'SQL',         percent: 82 },
+      { name: 'Python',      percent: 90, icon: '🐍' },
+      { name: 'JavaScript',  percent: 88, icon: '⚡' },
+      { name: 'HTML & CSS',  percent: 92, icon: '🎨' },
+      { name: 'SQL',         percent: 82, icon: '🗄️' },
     ],
-    barClass: '',
   },
   {
     title: 'Frameworks & Libraries',
     icon: '⚙️',
     skills: [
-      { name: 'React JS',     percent: 88 },
-      { name: 'Vite',         percent: 85 },
-      { name: 'Node.js',      percent: 80 },
-      { name: 'Express.js',   percent: 78 },
+      { name: 'React JS',     percent: 88, icon: '⚛️' },
+      { name: 'Vite',         percent: 85, icon: '⚡' },
+      { name: 'Node.js',      percent: 80, icon: '🟩' },
+      { name: 'Express.js',   percent: 78, icon: '🚀' },
     ],
-    barClass: 'accent',
   },
   {
     title: 'Data & Analytics',
     icon: '📊',
     skills: [
-      { name: 'Data Analysis',     percent: 88 },
-      { name: 'Data Visualization',percent: 90 },
-      { name: 'Power BI',          percent: 85 },
-      { name: 'Pandas & NumPy',    percent: 82 },
+      { name: 'Data Analysis',     percent: 88, icon: '🔬' },
+      { name: 'Data Visualization',percent: 90, icon: '📈' },
+      { name: 'Power BI',          percent: 85, icon: '📊' },
+      { name: 'Pandas & NumPy',    percent: 82, icon: '🐼' },
     ],
-    barClass: 'secondary',
   },
   {
     title: 'Tools & Platforms',
     icon: '🛠️',
     skills: [
-      { name: 'Git',     percent: 88 },
-      { name: 'GitHub',  percent: 90 },
-      { name: 'VS Code', percent: 95 },
-      { name: 'Figma',   percent: 75 },
+      { name: 'Git',     percent: 88, icon: '🌿' },
+      { name: 'GitHub',  percent: 90, icon: '🐙' },
+      { name: 'VS Code', percent: 95, icon: '💻' },
+      { name: 'Figma',   percent: 75, icon: '🎨' },
     ],
-    barClass: '',
   },
 ]
 
@@ -52,7 +48,7 @@ export default function Skills() {
     <section className="skills section" id="skills">
       <div className="container">
         <h2 className="section-title">Skills & Expertise</h2>
-        <p className="section-subtitle">Technologies I work with</p>
+        <p className="section-subtitle">Technologies & tools I work with</p>
 
         <div className="skills-categories">
           {skillCategories.map((cat) => (
@@ -62,16 +58,19 @@ export default function Skills() {
                 <h3 className="skill-category-title">{cat.title}</h3>
               </div>
 
-              <div className="skill-items">
+              <div className="skills-tile-grid">
                 {cat.skills.map((skill) => (
-                  <div key={skill.name} className="skill-row">
-                    <div className="skill-item-label">
-                      <span>{skill.name}</span>
-                      <span className="skill-percent">{skill.percent}%</span>
+                  <div key={skill.name} className="skill-tile">
+                    <div className="skill-tile-top">
+                      <div className="skill-tile-info">
+                        <span className="skill-tile-icon">{skill.icon}</span>
+                        <span className="skill-tile-name">{skill.name}</span>
+                      </div>
+                      <span className="skill-tile-percent">{skill.percent}%</span>
                     </div>
-                    <div className="skill-bar-track">
+                    <div className="skill-tile-track">
                       <div
-                        className="skill-bar-fill"
+                        className="skill-tile-fill"
                         style={{ width: `${skill.percent}%` }}
                       />
                     </div>
