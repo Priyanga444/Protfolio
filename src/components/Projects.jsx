@@ -2,13 +2,13 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
 const projects = [
   {
-    title: 'AI Career Recommender Website',
+    title: 'Career Recommender Website',
     description:
-      'A smart AI-powered web application that recommends the most suitable career paths based on students\' academic performance, skills, interests, and personal profiles. Built with Python and Machine Learning algorithms to deliver personalised, data-driven career guidance.',
+      'A web application that recommends suitable career paths based on students\' academic performance, skills, interests, and personal profiles. Built with Python and data analysis algorithms to deliver personalised career guidance.',
     image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=300&fit=crop&q=80',
     badge: '⭐ Main Project',
     badgeClass: 'badge-main',
-    techs: ['Python', 'Machine Learning', 'Streamlit', 'Scikit-learn', 'Pandas', 'NLP', 'Flask'],
+    techs: ['Python', 'Scikit-learn', 'Pandas', 'NLP'],
     demo: '#',
     github: '#',
     highlight: true,

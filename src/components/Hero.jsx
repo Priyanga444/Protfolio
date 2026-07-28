@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
-import { FiDownload, FiMail, FiGithub, FiLinkedin, FiArrowRight } from 'react-icons/fi'
+import { useEffect, useState } from 'react'
+import { FiDownload, FiMail, FiGithub, FiLinkedin, FiArrowRight, FiCode, FiCpu, FiDatabase, FiLayers } from 'react-icons/fi'
 
 const TYPING_STRINGS = [
-  'AI & Full Stack Developer',
-  'Machine Learning Enthusiast',
+  'Full Stack Developer',
   'Python Developer',
   'React Developer',
 ]
@@ -36,6 +35,8 @@ function useTypingEffect(strings, speed = 80, pause = 1800) {
   return display
 }
 
+
+
 export default function Hero() {
   const typed = useTypingEffect(TYPING_STRINGS)
 
@@ -54,8 +55,6 @@ export default function Hero() {
             <h1 className="hero-heading">
               Hi, I'm{' '}
               <span className="gradient-text">Priyanga</span>
-              <br />
-              <span className="accent-text">Ramesh</span>
             </h1>
 
             <div className="hero-typing-wrapper">
@@ -64,8 +63,8 @@ export default function Hero() {
             </div>
 
             <p className="hero-description">
-              Passionate about building intelligent systems and beautiful user experiences.
-              I combine the power of AI & Machine Learning with modern full-stack development
+              Passionate about building responsive web applications and clean user experiences.
+              I combine modern full-stack development with intuitive design
               to craft solutions that make a real-world impact.
             </p>
 
@@ -80,7 +79,7 @@ export default function Hero() {
 
             <div className="hero-socials">
               <a
-                href="https://github.com/Priyanga"
+                href="https://github.com/Priyanga444"
                 target="_blank"
                 rel="noreferrer"
                 className="social-icon"
@@ -89,7 +88,7 @@ export default function Hero() {
                 <FiGithub />
               </a>
               <a
-                href="https://linkedin.com/in/Priyanga"
+                href="https://www.linkedin.com/in/priyanga-r44/"
                 target="_blank"
                 rel="noreferrer"
                 className="social-icon"
@@ -98,7 +97,7 @@ export default function Hero() {
                 <FiLinkedin />
               </a>
               <a
-                href="mailto:priyanga@email.com"
+                href="mailto:priyangapriyanga444@gmail.com"
                 className="social-icon"
                 aria-label="Email"
               >
@@ -107,40 +106,48 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Image Side */}
+          {/* Right Side Illustration */}
           <div className="hero-image-wrapper">
-            <div className="hero-image-orb">
-              <div className="hero-image-orb-ring" />
-              <div className="hero-image-orb-ring2" />
-              <img
-                src="images/profile.jpg"
-                alt="Priyanga – AI & Full Stack Developer"
-                className="hero-avatar"
-              />
-
-              {/* Floating tech badges */}
-              <div className="hero-tech-badge badge-1">
-                <span className="tech-badge-icon">🤖</span> AI / ML
+            <div className="hero-illustration-wrap">
+              <div className="hero-code-card">
+                <div className="code-card-header">
+                  <span className="code-dot red"></span>
+                  <span className="code-dot yellow"></span>
+                  <span className="code-dot green"></span>
+                  <span className="code-card-title">developer.js</span>
+                </div>
+                <div className="code-card-body">
+                  <span className="code-line"><span className="code-kw">const</span> <span className="code-class">developer</span> = &#123;</span>
+                  <span className="code-line code-indent"><span className="code-prop">name</span>: <span className="code-str">'Priyanga'</span>,</span>
+                  <span className="code-line code-indent"><span className="code-prop">role</span>: <span className="code-str">'Full Stack Dev'</span>,</span>
+                  <span className="code-line code-indent"><span className="code-prop">skills</span>: [</span>
+                  <span className="code-line code-indent2"><span className="code-str">'React'</span>, <span className="code-str">'Python'</span>,</span>
+                  <span className="code-line code-indent2"><span className="code-str">'Node.js'</span>, <span className="code-str">'SQL'</span></span>
+                  <span className="code-line code-indent">&#93;,</span>
+                  <span className="code-line code-indent"><span className="code-prop">status</span>: <span className="code-str">'Building web apps'</span></span>
+                  <span className="code-line">&#125;</span>
+                  <span className="code-line code-blink-line"><span className="code-kw">developer</span>.<span className="code-fn">buildAwesomeStuff</span>()</span>
+                </div>
               </div>
-              <div className="hero-tech-badge badge-2">
+
+              {/* Floating badges */}
+              <div className="hero-tech-badge badge-1">
                 <span className="tech-badge-icon">⚛️</span> React
               </div>
-              <div className="hero-tech-badge badge-3">
+              <div className="hero-tech-badge badge-2">
                 <span className="tech-badge-icon">🐍</span> Python
               </div>
+              <div className="hero-tech-badge badge-3">
+                <span className="tech-badge-icon">🌐</span> Web Dev
+              </div>
               <div className="hero-tech-badge badge-4">
-                <span className="tech-badge-icon">🎨</span> UI/UX
+                <span className="tech-badge-icon">📊</span> SQL
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="hero-scroll-indicator">
-        <div className="scroll-mouse"><div className="scroll-dot" /></div>
-        <span>Scroll down</span>
-      </div>
     </section>
   )
 }

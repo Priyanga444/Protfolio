@@ -14,7 +14,7 @@ export default function Footer() {
 
           <div className="footer-socials">
             <a
-              href="https://github.com/Priyanga"
+              href="https://github.com/Priyanga444"
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -23,7 +23,7 @@ export default function Footer() {
               <FiGithub />
             </a>
             <a
-              href="https://linkedin.com/in/Priyanga"
+              href="https://www.linkedin.com/in/priyanga-r44/"
               target="_blank"
               rel="noreferrer"
               className="social-icon"
@@ -32,7 +32,7 @@ export default function Footer() {
               <FiLinkedin />
             </a>
             <a
-              href="mailto:priyanga@email.com"
+              href="mailto:priyangapriyanga444@gmail.com"
               className="social-icon"
               aria-label="Email"
             >

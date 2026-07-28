@@ -46,7 +46,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#home" className="nav-logo" onClick={(e) => { e.preventDefault(); handleNav('#home') }}>
           <div className="nav-logo-icon">P</div>
-          <span className="nav-logo-text">Priyanka</span>
+          <span className="nav-logo-text">Priyanga</span>
         </a>
 
         {/* Desktop Links */}

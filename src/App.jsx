@@ -12,7 +12,6 @@ import Experience   from './components/Experience'
 import Education    from './components/Education'
 import Achievements from './components/Achievements'
 import Contact      from './components/Contact'
-import Footer       from './components/Footer'
 
 // Scroll reveal hook
 function useScrollReveal() {
@@ -44,12 +43,6 @@ export default function App() {
     <>
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
 
-      {/* Particles */}
-      <ParticlesBg />
-
-      {/* Mouse glow */}
-      <MouseGlow />
-
       {/* Main content */}
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Navbar />
@@ -63,7 +56,6 @@ export default function App() {
           <Achievements />
           <Contact />
         </main>
-        <Footer />
       </div>
     </>
   )

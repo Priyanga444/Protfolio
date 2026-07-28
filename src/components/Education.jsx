@@ -21,11 +21,11 @@ const educationData = [
     percentage: '75%',
   },
   {
-    icon: '🤖',
+    icon: '💻',
     period: '2026 – Present',
     degree: 'Self-Learning & Online Certifications',
     school: ' Udemy',
-    details: 'Continuously upskilling in Machine Learning, React,Python.',
+    details: 'Continuously upskilling in React, Python, and Web Development.',
   },
 ]
 
