@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { FiDownload, FiMail, FiGithub, FiLinkedin, FiArrowRight, FiCode, FiCpu, FiDatabase, FiLayers } from 'react-icons/fi'
+import { FiDownload, FiMail, FiGithub, FiLinkedin, FiArrowRight } from 'react-icons/fi'
+import Ferrofluid from './Ferrofluid'
 
 const TYPING_STRINGS = [
   'Full Stack Developer',
@@ -35,14 +36,11 @@ function useTypingEffect(strings, speed = 80, pause = 1800) {
   return display
 }
 
-
-
 export default function Hero() {
   const typed = useTypingEffect(TYPING_STRINGS)
 
   return (
     <section className="hero section" id="home">
-      <div className="hero-bg-gradient" />
       <div className="container">
         <div className="hero-inner">
           {/* Text Side */}

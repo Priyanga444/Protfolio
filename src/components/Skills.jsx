@@ -1,84 +1,56 @@
-import { useEffect } from 'react'
+import FlowingMenu from './FlowingMenu'
+import { FaReact, FaNodeJs, FaDatabase, FaPython, FaHtml5, FaCss3Alt, FaJs, FaGitAlt, FaChartBar } from 'react-icons/fa'
+import { SiVercel, SiRender } from 'react-icons/si'
 
-const skillCategories = [
+const skillMenuCategories = [
   {
-    title: 'Programming Languages',
-    icon: '💻',
+    link: '#skills',
+    category: 'Frontend Development',
     skills: [
-      { name: 'Python',      percent: 90, icon: '🐍' },
-      { name: 'JavaScript',  percent: 88, icon: '⚡' },
-      { name: 'HTML & CSS',  percent: 92, icon: '🎨' },
-      { name: 'SQL',         percent: 82, icon: '🗄️' },
-    ],
+      { name: 'HTML5', icon: <FaHtml5 color="#E34F26" /> },
+      { name: 'React JS', icon: <FaReact color="#0284C7" /> },
+      { name: 'CSS3', icon: <FaCss3Alt color="#1572B6" /> },
+      { name: 'JavaScript', icon: <FaJs color="#F7DF1E" /> }
+    ]
   },
   {
-    title: 'Frameworks & Libraries',
-    icon: '⚙️',
+    link: '#skills',
+    category: 'Backend Development',
     skills: [
-      { name: 'React JS',     percent: 88, icon: '⚛️' },
-      { name: 'Vite',         percent: 85, icon: '⚡' },
-      { name: 'Node.js',      percent: 80, icon: '🟩' },
-      { name: 'Express.js',   percent: 78, icon: '🚀' },
-    ],
+      { name: 'Node JS', icon: <FaNodeJs color="#339933" /> },
+      { name: 'Python', icon: <FaPython color="#0284C7" /> },
+      { name: 'SQL', icon: <FaDatabase color="#00758F" /> }
+    ]
   },
   {
-    title: 'Data & Analytics',
-    icon: '📊',
+    link: '#skills',
+    category: 'Tools & Technologies',
     skills: [
-      { name: 'Data Analysis',     percent: 88, icon: '🔬' },
-      { name: 'Data Visualization',percent: 90, icon: '📈' },
-      { name: 'Power BI',          percent: 85, icon: '📊' },
-      { name: 'Pandas & NumPy',    percent: 82, icon: '🐼' },
-    ],
-  },
-  {
-    title: 'Tools & Platforms',
-    icon: '🛠️',
-    skills: [
-      { name: 'Git',     percent: 88, icon: '🌿' },
-      { name: 'GitHub',  percent: 90, icon: '🐙' },
-      { name: 'VS Code', percent: 95, icon: '💻' },
-      { name: 'Figma',   percent: 75, icon: '🎨' },
-    ],
-  },
+      { name: 'Git & GitHub', icon: <FaGitAlt color="#F05032" /> },
+      { name: 'Vercel', icon: <SiVercel color="#0F172A" /> },
+      { name: 'PowerBI', icon: <FaChartBar color="#F2C811" /> },
+      { name: 'Render', icon: <SiRender color="#0284C7" /> }
+    ]
+  }
 ]
 
 export default function Skills() {
   return (
     <section className="skills section" id="skills">
       <div className="container">
-        <h2 className="section-title">Skills & Expertise</h2>
-        <p className="section-subtitle">Technologies & tools I work with</p>
+        <h2 className="section-title reveal">Skills & Expertise</h2>
+        <p className="section-subtitle reveal delay-1">Hover over categories to reveal tech stack</p>
 
-        <div className="skills-categories">
-          {skillCategories.map((cat) => (
-            <div key={cat.title} className="skill-category-card">
-              <div className="skill-category-header">
-                <div className="skill-category-icon">{cat.icon}</div>
-                <h3 className="skill-category-title">{cat.title}</h3>
-              </div>
-
-              <div className="skills-tile-grid">
-                {cat.skills.map((skill) => (
-                  <div key={skill.name} className="skill-tile">
-                    <div className="skill-tile-top">
-                      <div className="skill-tile-info">
-                        <span className="skill-tile-icon">{skill.icon}</span>
-                        <span className="skill-tile-name">{skill.name}</span>
-                      </div>
-                      <span className="skill-tile-percent">{skill.percent}%</span>
-                    </div>
-                    <div className="skill-tile-track">
-                      <div
-                        className="skill-tile-fill"
-                        style={{ width: `${skill.percent}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="reveal delay-2" style={{ height: '420px', position: 'relative', borderRadius: '24px', overflow: 'hidden', margin: '2rem 0', border: '1px solid rgba(186, 230, 253, 0.8)', boxShadow: '0 15px 35px rgba(56, 189, 248, 0.15)' }}>
+          <FlowingMenu
+            items={skillMenuCategories}
+            speed={6}
+            textColor="#0F172A"
+            bgColor="rgba(240, 249, 255, 0.85)"
+            marqueeBgColor="#0284C7"
+            marqueeTextColor="#ffffff"
+            borderColor="rgba(186, 230, 253, 0.7)"
+          />
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+import FloatingLines from './FloatingLines/FloatingLines'
+
 const educationData = [
   {
     icon: '🎓',
@@ -31,8 +33,18 @@ const educationData = [
 
 export default function Education() {
   return (
-    <section className="education section" id="education">
-      <div className="container">
+    <section className="education section" id="education" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated Floating Lines Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.65, pointerEvents: 'none' }}>
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          linesGradient={['#0EA5E9', '#3B82F6', '#6366F1']}
+          animationSpeed={1}
+          interactive={true}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title reveal">Education</h2>
         <p className="section-subtitle reveal delay-1">My academic background</p>
 

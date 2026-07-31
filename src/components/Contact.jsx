@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FiGithub, FiLinkedin, FiMail, FiSend, FiMapPin, FiCheckCircle } from 'react-icons/fi'
+import FloatingLines from './FloatingLines/FloatingLines'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
@@ -39,8 +40,18 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact section" id="contact">
-      <div className="container">
+    <section className="contact section" id="contact" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated Floating Lines Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.65, pointerEvents: 'none' }}>
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          linesGradient={['#2563EB', '#7C3AED', '#EC4899']}
+          animationSpeed={1}
+          interactive={true}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">
           Have a project in mind? Let's build something amazing together.

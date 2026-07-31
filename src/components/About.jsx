@@ -1,7 +1,19 @@
+import FloatingLines from './FloatingLines/FloatingLines'
+
 export default function About() {
   return (
-    <section className="about section" id="about">
-      <div className="container">
+    <section className="about section" id="about" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated Floating Lines Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.6, pointerEvents: 'none' }}>
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          linesGradient={['#059669', '#10B981', '#06B6D4']}
+          animationSpeed={1}
+          interactive={true}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title reveal">About Me</h2>
         <p className="section-subtitle reveal delay-1">The person behind the code</p>
 

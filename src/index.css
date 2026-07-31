@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* =============================================
    GLOBAL DESIGN TOKENS & RESET — LIGHT THEME
    ============================================= */
@@ -41,7 +43,7 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--bg);
+  background-color: transparent;
   color: var(--text);
   overflow-x: hidden;
   line-height: 1.6;
@@ -487,7 +489,7 @@ body {
   position: relative;
   overflow: hidden;
   padding: 70px 0 15px;
-  background: var(--bg);
+  background: transparent;
 }
 
 .hero-bg-gradient {
@@ -764,7 +766,9 @@ body {
    ABOUT SECTION
    ============================================= */
 .about {
-  background: white;
+  background: var(--bg);
+  position: relative;
+  z-index: 2;
 }
 
 .about-inner {
@@ -780,7 +784,7 @@ body {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--bg2);
+  background: white;
   border: 1px solid var(--border);
   aspect-ratio: 3/4;
   max-width: 290px;
@@ -829,8 +833,8 @@ body {
 
 .about-stat-label {
   font-size: 0.75rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  color: var(--text-light);
+  font-weight: 600;
 }
 
 .about-content h2 {
@@ -842,10 +846,11 @@ body {
 }
 
 .about-content p {
-  color: var(--text-muted);
+  color: var(--text-light);
   line-height: 1.75;
   margin-bottom: 0.85rem;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+  font-weight: 450;
 }
 
 .about-tags {
@@ -876,7 +881,7 @@ body {
    SKILLS SECTION
    ============================================= */
 .skills {
-  background: var(--bg);
+  background: transparent;
 }
 
 .skills-categories {
@@ -909,22 +914,42 @@ body {
   border-bottom: 1px solid #F1F5F9;
 }
 
+.skill-category-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .skill-category-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   background: var(--bg3);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.skill-category-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .skill-category-title {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
+}
+
+.skill-category-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #2563EB;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .skills-tile-grid {
@@ -1001,7 +1026,7 @@ body {
    PROJECTS SECTION
    ============================================= */
 .projects {
-  background: white;
+  background: transparent;
 }
 
 .projects-grid {
@@ -1153,7 +1178,7 @@ body {
 }
 
 .experience {
-  background: var(--bg);
+  background: transparent;
 }
 
 .experience-single-wrap {
@@ -1317,7 +1342,7 @@ body {
    EDUCATION SECTION
    ============================================= */
 .education {
-  background: white;
+  background: transparent;
 }
 
 .education-grid {
@@ -1391,7 +1416,7 @@ body {
    ACHIEVEMENTS SECTION
    ============================================= */
 .achievements {
-  background: var(--bg);
+  background: transparent;
 }
 
 .achievements-counters {
@@ -1504,7 +1529,7 @@ body {
    CONTACT SECTION
    ============================================= */
 .contact {
-  background: white;
+  background: transparent;
 }
 
 .contact-inner {
@@ -1668,7 +1693,7 @@ body {
    FOOTER
    ============================================= */
 .footer {
-  background: var(--bg);
+  background: transparent;
   border-top: 1px solid var(--border);
   padding: 2rem 0 1.5rem;
 }

@@ -1,4 +1,5 @@
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
+import FloatingLines from './FloatingLines/FloatingLines'
 
 const projects = [
   {
@@ -41,8 +42,18 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="projects section" id="projects">
-      <div className="container">
+    <section className="projects section" id="projects" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated Floating Lines Background */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.65, pointerEvents: 'none' }}>
+        <FloatingLines
+          enabledWaves={['top', 'middle', 'bottom']}
+          linesGradient={['#EC4899', '#F97316', '#E11D48']}
+          animationSpeed={1}
+          interactive={true}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title reveal">My Projects</h2>
         <p className="section-subtitle reveal delay-1">Real-world solutions I've built with passion</p>
 

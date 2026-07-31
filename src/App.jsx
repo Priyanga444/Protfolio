@@ -13,6 +13,8 @@ import Education    from './components/Education'
 import Achievements from './components/Achievements'
 import Contact      from './components/Contact'
 
+import Ferrofluid from './components/Ferrofluid'
+
 // Scroll reveal hook
 function useScrollReveal() {
   useEffect(() => {
@@ -42,6 +44,30 @@ export default function App() {
   return (
     <>
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+
+      {/* Global Home Background across all pages/sections */}
+      <MouseGlow />
+      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.2 }}>
+          <Ferrofluid
+            colors={['#2563EB', '#38BDF8', '#6366F1']}
+            speed={0.5}
+            scale={1.6}
+            turbulence={1}
+            fluidity={0.1}
+            rimWidth={0.2}
+            sharpness={2.5}
+            shimmer={1.5}
+            glow={2}
+            flowDirection="down"
+            opacity={1}
+            mouseInteraction
+            mouseStrength={1}
+            mouseRadius={0.35}
+          />
+        </div>
+        <ParticlesBg />
+      </div>
 
       {/* Main content */}
       <div style={{ position: 'relative', zIndex: 1 }}>
