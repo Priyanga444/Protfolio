@@ -81,7 +81,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
     return baseColor;
   }
 
-  vec3 gradientColor;
+  vec3 gradientColor = lineGradient[0];
   
   if (lineGradientCount == 1) {
     gradientColor = lineGradient[0];
@@ -92,8 +92,13 @@ vec3 getLineColor(float t, vec3 baseColor) {
     float f = fract(scaled);
     int idx2 = min(idx + 1, lineGradientCount - 1);
 
-    vec3 c1 = lineGradient[idx];
-    vec3 c2 = lineGradient[idx2];
+    vec3 c1 = lineGradient[0];
+    vec3 c2 = lineGradient[0];
+
+    for (int k = 0; k < 8; k++) {
+      if (k == idx) c1 = lineGradient[k];
+      if (k == idx2) c2 = lineGradient[k];
+    }
     
     gradientColor = mix(c1, c2, f);
   }
@@ -392,10 +397,17 @@ export default function FloatingLines({
 
     if (ro) ro.observe(container);
 
+    window.addEventListener('resize', setSize);
+
     const handlePointerMove = event => {
+      if (!active) return;
+      const clientX = event.touches ? event.touches[0]?.clientX : event.clientX;
+      const clientY = event.touches ? event.touches[0]?.clientY : event.clientY;
+      if (clientX === undefined || clientY === undefined) return;
+
       const rect = renderer.domElement.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       const dpr = renderer.getPixelRatio();
 
       targetMouseRef.current.set(x * dpr, (rect.height - y) * dpr);
@@ -415,8 +427,9 @@ export default function FloatingLines({
     };
 
     if (interactive) {
-      renderer.domElement.addEventListener('pointermove', handlePointerMove);
-      renderer.domElement.addEventListener('pointerleave', handlePointerLeave);
+      window.addEventListener('mousemove', handlePointerMove, { passive: true });
+      window.addEventListener('touchmove', handlePointerMove, { passive: true });
+      window.addEventListener('mouseleave', handlePointerLeave, { passive: true });
     }
 
     let raf = 0;
@@ -450,9 +463,12 @@ export default function FloatingLines({
 
       if (ro) ro.disconnect();
 
+      window.removeEventListener('resize', setSize);
+
       if (interactive) {
-        renderer.domElement.removeEventListener('pointermove', handlePointerMove);
-        renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
+        window.removeEventListener('mousemove', handlePointerMove);
+        window.removeEventListener('touchmove', handlePointerMove);
+        window.removeEventListener('mouseleave', handlePointerLeave);
       }
 
       geometry.dispose();
