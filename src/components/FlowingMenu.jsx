@@ -17,6 +17,7 @@ export default function FlowingMenu({
         {items.map((item, idx) => (
           <MenuItem
             key={idx}
+            idx={idx}
             {...item}
             speed={speed}
             textColor={textColor}
@@ -30,26 +31,10 @@ export default function FlowingMenu({
   );
 }
 
-function MenuItem({ link, text, category, skills = [], speed, textColor, marqueeBgColor, marqueeTextColor, borderColor }) {
-  const itemRef = useRef(null);
-  const marqueeRef = useRef(null);
+function MenuItem({ idx, category, skills = [], speed, textColor, borderColor }) {
   const marqueeInnerRef = useRef(null);
   const animationRef = useRef(null);
   const [repetitions, setRepetitions] = useState(4);
-
-  const animationDefaults = { duration: 0.6, ease: 'expo' };
-
-  const findClosestEdge = (mouseX, mouseY, width, height) => {
-    const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0);
-    const bottomEdgeDist = distMetric(mouseX, mouseY, width / 2, height);
-    return topEdgeDist < bottomEdgeDist ? 'top' : 'bottom';
-  };
-
-  const distMetric = (x, y, x2, y2) => {
-    const xDiff = x - x2;
-    const yDiff = y - y2;
-    return xDiff * xDiff + yDiff * yDiff;
-  };
 
   useEffect(() => {
     const calculateRepetitions = () => {
@@ -68,7 +53,7 @@ function MenuItem({ link, text, category, skills = [], speed, textColor, marquee
     calculateRepetitions();
     window.addEventListener('resize', calculateRepetitions);
     return () => window.removeEventListener('resize', calculateRepetitions);
-  }, [text, skills]);
+  }, [skills]);
 
   useEffect(() => {
     const setupMarquee = () => {
@@ -84,8 +69,11 @@ function MenuItem({ link, text, category, skills = [], speed, textColor, marquee
         animationRef.current.kill();
       }
 
+      // Alternate scrolling direction for adjacent rows
+      const directionMultiplier = idx % 2 === 0 ? -1 : 1;
+
       animationRef.current = gsap.to(marqueeInnerRef.current, {
-        x: -contentWidth,
+        x: directionMultiplier * contentWidth,
         duration: speed,
         ease: 'none',
         repeat: -1
@@ -100,60 +88,25 @@ function MenuItem({ link, text, category, skills = [], speed, textColor, marquee
         animationRef.current.kill();
       }
     };
-  }, [text, skills, repetitions, speed]);
-
-  const handleMouseEnter = ev => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
-    const rect = itemRef.current.getBoundingClientRect();
-    const x = ev.clientX - rect.left;
-    const y = ev.clientY - rect.top;
-    const edge = findClosestEdge(x, y, rect.width, rect.height);
-
-    gsap
-      .timeline({ defaults: animationDefaults })
-      .set(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
-      .set(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0)
-      .to([marqueeRef.current, marqueeInnerRef.current], { y: '0%' }, 0);
-  };
-
-  const handleMouseLeave = ev => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
-    const rect = itemRef.current.getBoundingClientRect();
-    const x = ev.clientX - rect.left;
-    const y = ev.clientY - rect.top;
-    const edge = findClosestEdge(x, y, rect.width, rect.height);
-
-    gsap
-      .timeline({ defaults: animationDefaults })
-      .to(marqueeRef.current, { y: edge === 'top' ? '-101%' : '101%' }, 0)
-      .to(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0);
-  };
+  }, [skills, repetitions, speed, idx]);
 
   return (
-    <div className="menu__item" ref={itemRef} style={{ borderColor }}>
-      <a
-        className="menu__item-link"
-        href={link}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{ color: textColor }}
-      >
-        <span className="menu__item-category">{category}</span>
-      </a>
-      <div className="marquee" ref={marqueeRef} style={{ backgroundColor: marqueeBgColor }}>
-        <div className="marquee__inner-wrap">
-          <div className="marquee__inner" ref={marqueeInnerRef} aria-hidden="true">
-            {[...Array(repetitions)].map((_, idx) => (
-              <div className="marquee__part" key={idx} style={{ color: marqueeTextColor }}>
-                {skills.map((skill, sIdx) => (
-                  <div className="marquee__skill-badge" key={sIdx}>
-                    <span className="marquee__skill-icon">{skill.icon}</span>
-                    <span>{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+    <div className="menu__item" style={{ borderColor }}>
+      <div className="menu__item-category-label" style={{ color: textColor }}>
+        {category}
+      </div>
+      <div className="marquee-container">
+        <div className="marquee__inner" ref={marqueeInnerRef} aria-hidden="true">
+          {[...Array(repetitions)].map((_, rIdx) => (
+            <div className="marquee__part" key={rIdx}>
+              {skills.map((skill, sIdx) => (
+                <div className="marquee__skill-badge" key={sIdx}>
+                  <span className="marquee__skill-icon">{skill.icon}</span>
+                  <span>{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

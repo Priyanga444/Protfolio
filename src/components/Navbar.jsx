@@ -2,33 +2,23 @@ import { useEffect, useState } from 'react'
 import { FiDownload, FiMenu, FiX } from 'react-icons/fi'
 
 const navItems = [
-  { label: 'Home',        href: '#home' },
-  { label: 'About',       href: '#about' },
-  { label: 'Skills',      href: '#skills' },
-  { label: 'Projects',    href: '#projects' },
-  { label: 'Experience',  href: '#experience' },
-  { label: 'Education',   href: '#education' },
-  { label: 'Achievements',href: '#achievements' },
-  { label: 'Contact',     href: '#contact' },
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
+  { label: 'Achievements', href: '#achievements' },
+  { label: 'Contact', href: '#contact' },
 ]
 
-export default function Navbar() {
-  const [scrolled, setScrolled]       = useState(false)
-  const [active, setActive]           = useState('#home')
-  const [menuOpen, setMenuOpen]       = useState(false)
+export default function Navbar({ active, onSectionChange }) {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50)
-
-      // Determine active section
-      const sections = navItems.map(n => n.href.slice(1))
-      let current = sections[0]
-      for (const id of sections) {
-        const el = document.getElementById(id)
-        if (el && window.scrollY >= el.offsetTop - 120) current = id
-      }
-      setActive('#' + current)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -36,8 +26,8 @@ export default function Navbar() {
 
   const handleNav = (href) => {
     setMenuOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    onSectionChange(href)
+    window.scrollTo({ top: 0 })
   }
 
   return (
@@ -45,7 +35,6 @@ export default function Navbar() {
       <div className="nav-inner">
         {/* Logo */}
         <a href="#home" className="nav-logo" onClick={(e) => { e.preventDefault(); handleNav('#home') }}>
-          <div className="nav-logo-icon">P</div>
           <span className="nav-logo-text">Priyanga</span>
         </a>
 
@@ -66,7 +55,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="nav-cta">
-          <a href="/resume.pdf" download className="btn btn-primary" style={{ fontSize: '0.82rem', padding: '0.55rem 1.2rem' }}>
+          <a href="/Priyanga-resume.pdf" download="Priyanga-resume.pdf" className="btn btn-primary" style={{ fontSize: '0.82rem', padding: '0.55rem 1.2rem' }}>
             <FiDownload /> Resume
           </a>
         </div>

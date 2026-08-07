@@ -1,102 +1,120 @@
 import { useEffect, useState } from 'react'
-import { FiDownload, FiMail, FiGithub, FiLinkedin, FiArrowRight } from 'react-icons/fi'
-import Ferrofluid from './Ferrofluid'
+import { 
+  FiGithub, 
+  FiLinkedin, 
+  FiMail, 
+  FiFileText, 
+  FiTerminal, 
+  FiCode, 
+  FiCpu, 
+  FiSend,
+  FiMapPin,
+  FiBriefcase
+} from 'react-icons/fi'
 
-const TYPING_STRINGS = [
-  'Full Stack Developer',
-  'Python Developer',
-  'React Developer',
+const ROLES = [
+  'Full Stack Software Engineer',
+  'Python & React Developer',
+  'MCA Candidate (2026)',
+  'Scalable Web App Architect'
 ]
 
-function useTypingEffect(strings, speed = 80, pause = 1800) {
-  const [display, setDisplay] = useState('')
-  const [idx, setIdx] = useState(0)
+function useDynamicTyping(phrases, typingSpeed = 70, eraseSpeed = 40, delay = 2000) {
+  const [text, setText] = useState('')
+  const [phraseIdx, setPhraseIdx] = useState(0)
   const [charIdx, setCharIdx] = useState(0)
-  const [deleting, setDeleting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
-    const current = strings[idx % strings.length]
-    let timeout
+    if (!phrases || phrases.length === 0) return
 
-    if (!deleting && charIdx < current.length) {
-      timeout = setTimeout(() => setCharIdx(c => c + 1), speed)
-    } else if (!deleting && charIdx === current.length) {
-      timeout = setTimeout(() => setDeleting(true), pause)
-    } else if (deleting && charIdx > 0) {
-      timeout = setTimeout(() => setCharIdx(c => c - 1), speed / 2)
-    } else if (deleting && charIdx === 0) {
-      setDeleting(false)
-      setIdx(i => i + 1)
-    }
+    const currentPhrase = phrases[phraseIdx % phrases.length]
 
-    setDisplay(current.substring(0, charIdx))
-    return () => clearTimeout(timeout)
-  }, [charIdx, deleting, idx, strings, speed, pause])
+    let timer = setTimeout(() => {
+      if (!isDeleting && charIdx < currentPhrase.length) {
+        setText(currentPhrase.substring(0, charIdx + 1))
+        setCharIdx((prev) => prev + 1)
+      } else if (!isDeleting && charIdx === currentPhrase.length) {
+        setTimeout(() => setIsDeleting(true), delay)
+      } else if (isDeleting && charIdx > 0) {
+        setText(currentPhrase.substring(0, charIdx - 1))
+        setCharIdx((prev) => prev - 1)
+      } else if (isDeleting && charIdx === 0) {
+        setIsDeleting(false)
+        setPhraseIdx((prev) => prev + 1)
+      }
+    }, isDeleting ? eraseSpeed : typingSpeed)
 
-  return display
+    return () => clearTimeout(timer)
+  }, [charIdx, isDeleting, phraseIdx, phrases, typingSpeed, eraseSpeed, delay])
+
+  return text
 }
 
 export default function Hero() {
-  const typed = useTypingEffect(TYPING_STRINGS)
+  const currentRole = useDynamicTyping(ROLES)
 
   return (
-    <section className="hero section" id="home">
-      <div className="container">
-        <div className="hero-inner">
-          {/* Text Side */}
-          <div className="hero-text">
-            <div className="hero-badge">
-              <span className="hero-badge-dot" />
-              Open to Opportunities
+    <section className="hero-section" id="home">
+      <div className="hero-container">
+        {/* Main Content Layout */}
+        <div className="hero-grid">
+          
+          {/* Left Column: Intro & Headline */}
+          <div className="hero-main-content">
+            <div className="status-badge">
+              <span className="pulse-dot" />
+              <span>Available for Hire & Internships</span>
             </div>
 
-            <h1 className="hero-heading">
-              Hi, I'm{' '}
-              <span className="gradient-text">Priyanga</span>
+            <h1 className="hero-title">
+              Hi, I'm <span className="highlight-text">Priyanga R</span>
             </h1>
 
-            <div className="hero-typing-wrapper">
-              <span>{typed}</span>
-              <span className="typing-cursor" />
+            <div className="role-container">
+              <FiTerminal className="role-icon" />
+              <span className="typed-text">{currentRole}</span>
+              <span className="blinking-cursor">|</span>
             </div>
 
-            <p className="hero-description">
-              Passionate about building responsive web applications and clean user experiences.
-              I combine modern full-stack development with intuitive design
-              to craft solutions that make a real-world impact.
+            <p className="hero-summary">
+              I build high-performance web applications with modern tech stacks. Focused on clean architecture, seamless UX, and data-driven solutions using React, Python, and cloud-native databases.
             </p>
 
-            <div className="hero-cta">
+            {/* CTAs */}
+            <div className="hero-actions">
               <a href="#contact" className="btn btn-primary">
-                Let's Talk <FiArrowRight />
+                <FiSend /> Get in Touch
               </a>
-              <a href="/resume.pdf" download className="btn btn-outline">
-                <FiDownload /> Download CV
+              <a href="/Priyanga-resume.pdf" download="Priyanga-resume.pdf" className="btn btn-secondary">
+                <FiFileText /> View Resume
               </a>
             </div>
 
-            <div className="hero-socials">
-              <a
-                href="https://github.com/Priyanga444"
-                target="_blank"
-                rel="noreferrer"
-                className="social-icon"
+            {/* Quick Links / Socials */}
+            <div className="hero-social-bar">
+              <span className="social-label">Connect:</span>
+              <a 
+                href="https://github.com/Priyanga444" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="social-btn"
                 aria-label="GitHub"
               >
                 <FiGithub />
               </a>
-              <a
-                href="https://www.linkedin.com/in/priyanga-r44/"
-                target="_blank"
-                rel="noreferrer"
-                className="social-icon"
+              <a 
+                href="https://www.linkedin.com/in/priyanga-r44/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="social-btn"
                 aria-label="LinkedIn"
               >
                 <FiLinkedin />
               </a>
-              <a
-                href="mailto:priyangapriyanga444@gmail.com"
-                className="social-icon"
+              <a 
+                href="mailto:priyangapriyanga444@gmail.com" 
+                className="social-btn"
                 aria-label="Email"
               >
                 <FiMail />
@@ -104,48 +122,71 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Side Illustration */}
-          <div className="hero-image-wrapper">
-            <div className="hero-illustration-wrap">
-              <div className="hero-code-card">
-                <div className="code-card-header">
-                  <span className="code-dot red"></span>
-                  <span className="code-dot yellow"></span>
-                  <span className="code-dot green"></span>
-                  <span className="code-card-title">developer.js</span>
+          {/* Right Column: Interactive Bento Cards & Live Terminal Visual */}
+          <div className="hero-bento-grid">
+            
+            {/* Card 1: Interactive Terminal */}
+            <div className="bento-card terminal-card">
+              <div className="terminal-header">
+                <div className="terminal-controls">
+                  <span className="dot red" />
+                  <span className="dot yellow" />
+                  <span className="dot green" />
                 </div>
-                <div className="code-card-body">
-                  <span className="code-line"><span className="code-kw">const</span> <span className="code-class">developer</span> = &#123;</span>
-                  <span className="code-line code-indent"><span className="code-prop">name</span>: <span className="code-str">'Priyanga'</span>,</span>
-                  <span className="code-line code-indent"><span className="code-prop">role</span>: <span className="code-str">'Full Stack Dev'</span>,</span>
-                  <span className="code-line code-indent"><span className="code-prop">skills</span>: [</span>
-                  <span className="code-line code-indent2"><span className="code-str">'React'</span>, <span className="code-str">'Python'</span>,</span>
-                  <span className="code-line code-indent2"><span className="code-str">'Node.js'</span>, <span className="code-str">'SQL'</span></span>
-                  <span className="code-line code-indent">&#93;,</span>
-                  <span className="code-line code-indent"><span className="code-prop">status</span>: <span className="code-str">'Building web apps'</span></span>
-                  <span className="code-line">&#125;</span>
-                  <span className="code-line code-blink-line"><span className="code-kw">developer</span>.<span className="code-fn">buildAwesomeStuff</span>()</span>
+                <span className="terminal-title">bash — priyanga@portfolio:~</span>
+              </div>
+              <div className="terminal-body">
+                <p className="cmd-line">
+                  <span className="prompt">$</span> priyanga --info
+                </p>
+                <div className="cmd-output">
+                  <p><span>Degree:</span> MCA (Class of 2026)</p>
+                  <p><span>Location:</span> India <FiMapPin className="inline-icon" /></p>
+                  <p><span>Stack:</span> React, Python, Express, SQL</p>
+                  <p><span>Focus:</span> Full-Stack Web App Development</p>
                 </div>
-              </div>
-
-              {/* Floating badges */}
-              <div className="hero-tech-badge badge-1">
-                <span className="tech-badge-icon">⚛️</span> React
-              </div>
-              <div className="hero-tech-badge badge-2">
-                <span className="tech-badge-icon">🐍</span> Python
-              </div>
-              <div className="hero-tech-badge badge-3">
-                <span className="tech-badge-icon">🌐</span> Web Dev
-              </div>
-              <div className="hero-tech-badge badge-4">
-                <span className="tech-badge-icon">📊</span> SQL
+                <p className="cmd-line">
+                  <span className="prompt">$</span> priyanga --status
+                </p>
+                <p className="cmd-output active-status">
+                  🟢 Ready to solve complex problems and collaborate!
+                </p>
               </div>
             </div>
+
+            {/* Card 2: Key Metrics Grid */}
+            <div className="bento-card stats-subgrid">
+              <div className="stat-box">
+                <FiCode className="stat-icon" />
+                <h4>15+</h4>
+                <p>Projects Built</p>
+              </div>
+              <div className="stat-box">
+                <FiCpu className="stat-icon" />
+                <h4>10+</h4>
+                <p>Tech Stack Tools</p>
+              </div>
+              <div className="stat-box">
+                <FiBriefcase className="stat-icon" />
+                <h4>1+</h4>
+                <p>Internships</p>
+              </div>
+            </div>
+
+            {/* Card 3: Skills Marquee Strip */}
+            <div className="bento-card tech-strip-card">
+              <span className="tech-tag">React</span>
+              <span className="tech-tag">Python</span>
+              <span className="tech-tag">Node.js</span>
+              <span className="tech-tag">PostgreSQL</span>
+              <span className="tech-tag">Power BI</span>
+              <span className="tech-tag">Express</span>
+            </div>
+
           </div>
+
         </div>
       </div>
-
     </section>
   )
 }

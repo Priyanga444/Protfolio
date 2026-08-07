@@ -1,83 +1,49 @@
-import FloatingLines from './FloatingLines/FloatingLines'
+import { FiTerminal } from 'react-icons/fi'
+import aboutImg from '../assets/about.jpeg'
 
 export default function About() {
   return (
     <section className="about section" id="about" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Animated Floating Lines Background */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.6, pointerEvents: 'none' }}>
-        <FloatingLines
-          enabledWaves={['top', 'middle', 'bottom']}
-          linesGradient={['#059669', '#10B981', '#06B6D4']}
-          animationSpeed={1}
-          interactive={true}
-        />
-      </div>
-
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title reveal">About Me</h2>
-        <p className="section-subtitle reveal delay-1">The person behind the code</p>
+        <p className="section-subtitle reveal delay-1">
+          The person behind the code — passion, craftsmanship & innovation
+        </p>
 
         <div className="about-inner">
-          {/* Image Side */}
+          {/* Left Column: Image Card */}
           <div className="about-image-side reveal-left">
             <div className="about-image-card">
               <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&fit=crop&q=80"
-                alt="Priyanga Workspace"
+                src={aboutImg}
+                alt="Priyanga"
               />
             </div>
-            <div className="about-stats">
-              <div className="about-stat-item">
-                <div className="about-stat-number">2+</div>
-                <div className="about-stat-label">Years Experience</div>
+          </div>
+
+          {/* Right Column: Bio Card */}
+          <div className="about-content-side reveal-right">
+            <div className="about-bio-card">
+              <div className="about-badge-tag">
+                <FiTerminal className="inline-icon-blue" />
+                <span>Full Stack Developer & Problem Solver</span>
               </div>
-              <div className="about-stat-item">
-                <div className="about-stat-number">10+</div>
-                <div className="about-stat-label">Projects Completed</div>
-              </div>
+
+              <h2 className="about-heading">
+                Building the Future with{' '}
+                <span className="about-gradient-text">Design & Clean Code</span>
+              </h2>
+
+              <p className="about-paragraph">
+                Hi! I'm <strong>Priyanga</strong>, an ambitious Full Stack Software Engineer currently pursuing my <strong>MCA (Class of 2026)</strong>. I specialize in building modern, high-performance web applications that bridge intuitive user interfaces with robust backend architectures.
+              </p>
+
+              <p className="about-paragraph" style={{ marginBottom: 0 }}>
+                My passion lies at the intersection of technical elegance and user-centric design. Whether engineering scalable RESTful services in Python & Node.js, crafting reactive components with React, or designing analytical dashboards with Power BI — I focus on delivering code that is performant, scalable, and impactful.
+              </p>
             </div>
           </div>
-          <div className="about-content reveal-right">
-            <h2>
-              Building the Future with{' '}
-              <span className="gradient-text">Design & Code</span>
-            </h2>
 
-            <p>
-              I'm <strong style={{ color: 'var(--text)' }}>Priyanga</strong>, an
-              enthusiastic Full Stack Developer with a passion for creating high-performance,
-              user-centric applications. My journey in tech is driven by curiosity and a
-              relentless desire to solve complex problems elegantly.
-            </p>
-            <p>
-              I specialize in <strong style={{ color: 'var(--primary)' }}>Full Stack Development</strong>.
-              From building interactive web applications to designing intuitive
-              user interfaces — I bring ideas to life with precision and creativity.
-            </p>
-            <p>
-              I believe great software is born at the intersection of technical excellence and
-              a deep understanding of user needs. Every product I build isn't just functional
-              — it's meaningful, efficient, and built to last.
-            </p>
-            <p>
-              When I'm not coding, I'm continuously learning — exploring modern web technologies,
-              contributing to open-source, and staying at the forefront of the ever-evolving
-              tech landscape.
-            </p>
-
-            <div className="about-tags">
-              {[
-                '🐍 Python',
-                '⚛️ React',
-                '🌐 Full Stack',
-                '💡 Problem Solving',
-                '📈 Data Visualization',
-                '📊 Power BI',
-              ].map(tag => (
-                <span key={tag} className="about-tag">{tag}</span>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

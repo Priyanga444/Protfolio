@@ -8,7 +8,6 @@ export default function Footer() {
       <div className="container">
         <div className="footer-inner">
           <a href="#home" className="footer-logo">
-            <div className="nav-logo-icon">P</div>
             <span className="nav-logo-text">Priyanga</span>
           </a>
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './index.css'
-import LoadingScreen from './components/LoadingScreen'
 import MouseGlow    from './components/MouseGlow'
 import ParticlesBg  from './components/ParticlesBg'
+import Ferrofluid   from './components/Ferrofluid'
 import Navbar       from './components/Navbar'
 import Hero         from './components/Hero'
 import About        from './components/About'
@@ -13,7 +13,7 @@ import Education    from './components/Education'
 import Achievements from './components/Achievements'
 import Contact      from './components/Contact'
 
-import Ferrofluid from './components/Ferrofluid'
+
 
 // Scroll reveal hook
 function useScrollReveal() {
@@ -38,19 +38,19 @@ function useScrollReveal() {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
+  const [activeSection, setActiveSection] = useState('#home')
   useScrollReveal()
 
   return (
     <>
-      {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
 
-      {/* Global Home Background across all pages/sections */}
       <MouseGlow />
+
+      {/* Global Background across all pages/sections */}
       <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.2 }}>
           <Ferrofluid
-            colors={['#2563EB', '#38BDF8', '#6366F1']}
+            colors={['#1E3A8A', '#1D4ED8', '#3B82F6']}
             speed={0.5}
             scale={1.6}
             turbulence={1}
@@ -71,16 +71,18 @@ export default function App() {
 
       {/* Main content */}
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <Navbar />
+        <Navbar active={activeSection} onSectionChange={setActiveSection} />
         <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Education />
-          <Achievements />
-          <Contact />
+          {activeSection === '#home' && <Hero />}
+          {activeSection === '#about' && <About />}
+          {activeSection === '#skills' && <Skills />}
+          {activeSection === '#projects' && <Projects />}
+          {activeSection === '#experience' && <Experience />}
+          {activeSection === '#education' && <Education />}
+          {activeSection === '#achievements' && <Achievements />}
+          {activeSection === '#contact' && <Contact />}
+
+          
         </main>
       </div>
     </>
